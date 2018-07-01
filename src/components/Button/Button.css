@@ -1,0 +1,23 @@
+.Button {
+	border: 0 none;
+	color: #a5e1f7;
+	background-color: #27647B;
+	width: 15%;
+	text-align: center;
+	margin: 0 0 0 5px;
+	border-radius: 3px;
+	font-size: 1.75em;
+}
+
+@media only screen and (max-width: 580px) {
+	.Button {
+		font-size: 1.25em;
+	}
+} 
+
+@media only screen and (max-height: 500px) {
+	.Button {
+		font-size: 1em;
+		line-height: 0;
+	}
+} 

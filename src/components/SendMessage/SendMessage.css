@@ -1,0 +1,12 @@
+.SendMessage {
+	display: flex;
+	border-radius: 13px;
+	width: 49%;
+}
+
+@media only screen and (max-width: 580px) {
+	.SendMessage {
+		width: auto;
+		margin-top: 5px;
+	}
+} 

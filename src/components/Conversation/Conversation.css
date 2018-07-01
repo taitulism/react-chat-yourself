@@ -1,0 +1,19 @@
+.Conversation {
+	height: 100%;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	padding: 5px 10px;
+}
+
+.message-row {
+	border-radius: 7px;
+	list-style-type: none;
+	display: flex;
+	padding: 5px 0;
+	justify-content: flex-start;
+}
+
+.message-row.other {
+	justify-content: flex-end;
+}

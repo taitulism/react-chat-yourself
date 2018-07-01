@@ -1,0 +1,31 @@
+.App {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-width: 50vw;
+	max-width: 75vw;
+	height: 98vh;	
+	margin: 0 auto;
+	background-color: #1D1D1D;
+	font-size: 16px;
+}
+
+.conversation-wrapper {
+	height: 90vh;
+    overflow-y: auto;
+}
+
+.inputs-wrapper {
+	/* height: 5vh; */
+	min-height: 35px;
+	display: flex;
+	justify-content: space-between;
+	padding: 5px;
+}
+
+
+@media only screen and (max-width: 580px) {
+	.inputs-wrapper {
+		flex-direction: column;
+	}
+} 
