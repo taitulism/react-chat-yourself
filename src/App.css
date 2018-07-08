@@ -3,20 +3,26 @@
 	flex-direction: column;
 	justify-content: space-between;
 	min-width: 50vw;
-	max-width: 75vw;
-	height: 98vh;	
+	max-width: 720px;
+	height: 100%;	
 	margin: 0 auto;
 	background-color: #1D1D1D;
 	font-size: 16px;
 }
 
+header {
+	color: #75c6e4;
+	font-size: 2em;
+    background-color: #242424;
+    padding: 0.75em 30px;
+}
+
 .conversation-wrapper {
 	height: 90vh;
-    overflow-y: auto;
+    overflow: hidden;
 }
 
 .inputs-wrapper {
-	/* height: 5vh; */
 	min-height: 35px;
 	display: flex;
 	justify-content: space-between;
@@ -24,7 +30,14 @@
 }
 
 
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 386px) {
+	header {
+		font-size: 1.5em;
+		padding: 0.75em 20px;
+	}
+}
+
+@media only screen and (max-width: 440px) {
 	.inputs-wrapper {
 		flex-direction: column;
 	}

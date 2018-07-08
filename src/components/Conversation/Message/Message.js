@@ -4,6 +4,20 @@ import PropTypes from 'prop-types';
 import './Message.css';
 
 class Message extends Component {
+	static propTypes = {
+		msgId: PropTypes.number.isRequired,
+		text: PropTypes.string.isRequired,
+		otherSide: PropTypes.bool,
+		repliesTo: PropTypes.object,
+		isReplyTarget: PropTypes.bool,
+		onReply: PropTypes.func.isRequired,
+	}
+
+	static defaultProps = {
+		otherSide: false,
+		isReplyTarget: false,
+	}
+
 	reply = () => {
 		const {isReplyTarget, msgId, onReply} = this.props;
 
@@ -20,8 +34,7 @@ class Message extends Component {
 
 		const WrapperClsNm = setClassName('message-wrapper', {'other': otherSide});
 		const messageClsNm = setClassName('Message', {'other': otherSide, 'selected': isReplyTarget});
-		const replyClsNm = setClassName('reply', {'other': otherSide, 'selected': isReplyTarget});
-		// const mainClassName = setClassName('message-main', {'reply-target': isReplyTarget});
+		const replyClsNm   = setClassName('reply',   {'other': otherSide, 'selected': isReplyTarget});
 
 		const replyArrow = otherSide ? '↶' : '↷';
 
@@ -36,19 +49,5 @@ class Message extends Component {
 		);
 	}
 }
-
-Message.propTypes = {
-	msgId: PropTypes.number.isRequired,
-	text: PropTypes.string.isRequired,
-	otherSide: PropTypes.bool,
-	repliesTo: PropTypes.object,
-	isReplyTarget: PropTypes.bool,
-	onReply: PropTypes.func.isRequired,
-};
-
-Message.defaultProps = {
-	otherSide: false,
-	isReplyTarget: false,
-};
 
 export default Message;
