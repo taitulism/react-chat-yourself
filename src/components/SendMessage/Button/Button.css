@@ -9,7 +9,7 @@
 	font-size: 1.75em;
 }
 
-@media only screen and (max-width: 580px) {
+@media only screen and (max-width: 440px) {
 	.Button {
 		font-size: 1.25em;
 	}

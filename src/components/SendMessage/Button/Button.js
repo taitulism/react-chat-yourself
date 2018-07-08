@@ -4,6 +4,11 @@ import PropTypes from 'prop-types';
 import './Button.css';
 
 class Button extends Component {
+	static propTypes = {
+		label: PropTypes.string.isRequired,
+		clickHandler: PropTypes.func.isRequired,
+	}
+
 	render () {
 		const {label, clickHandler} = this.props;
 
@@ -14,10 +19,5 @@ class Button extends Component {
 		);
 	}
 }
-
-Button.propTypes = {
-	label: PropTypes.string.isRequired,
-	clickHandler: PropTypes.func.isRequired,
-};
 
 export default Button;

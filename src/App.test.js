@@ -17,6 +17,6 @@ describe('<APP />', () => {
 	});
 
 	it('has two input fields', () => {
-		expect(wrapper.find('Input')).toHaveLength(2);
+		expect(wrapper.find('SendMessage')).toHaveLength(2);
 	});
 });

@@ -1,10 +1,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import Input from '../Input/Input';
-import Button from '../Button/Button';
+import Input from './Input/Input';
+import Button from './Button/Button';
 import './SendMessage.css';
 
 class SendMessage extends Component {
+	static propTypes = {
+		userName: PropTypes.string.isRequired,
+		onSend: PropTypes.func.isRequired,
+	}
+
 	constructor (props) {
 		super(props);
 	
@@ -13,25 +18,25 @@ class SendMessage extends Component {
 		};
 	}
 
-	// handleChange = (ev) => {
-	// 	this.setState({message: ev.target.value});
-	// }
-
-	// handleClick = (ev) => {
-
-	// }
-
 	updateMsg = (text) => {
 		this.setState({messageText: text});
+	}
+
+	validate = (text) => {
+		if (text === '') return false;
+
+		return true;
 	}
 
 	send = () => {
 		const {userName} = this.props;
 		const {messageText} = this.state;
+		const isValid = this.validate(messageText);
 
-		this.props.onSend(userName, messageText);
-
-		this.setState({messageText: ''});
+		if (isValid) {
+			this.props.onSend(userName, messageText);
+			this.setState({messageText: ''});
+		}
 	}
 
 	render () {
@@ -41,7 +46,7 @@ class SendMessage extends Component {
 			<div className="SendMessage">
 				<Input
 					text={messageText}
-					onUpdate={this.updateMsg}
+					onChange={this.updateMsg}
 					onEnter={this.send}
 				/>
 				<Button
@@ -52,10 +57,5 @@ class SendMessage extends Component {
 		);
 	}
 }
-
-SendMessage.propTypes = {
-	userName: PropTypes.string.isRequired,
-	onSend: PropTypes.func.isRequired,
-};
 
 export default SendMessage;

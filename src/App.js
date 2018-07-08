@@ -46,6 +46,7 @@ class App extends Component {
 
 		return (
 			<div className="App">
+				<header>iChat - Chat Yourself!</header>
 				<section className="conversation-wrapper">
 					<Conversation
 						replyTarget={replyTarget}
