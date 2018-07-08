@@ -48,7 +48,7 @@ describe('<Button />', () => {
 			wrapper = shallow(<Button {...props} />);
 		});
 
-		it('runs its `clickHandler` prop function when clicked', () => {
+		it('runs its `clickHandler` prop-function when clicked', () => {
 			wrapper.find('button').simulate('click');
 			
 			expect(mockCallback.mock.calls.length).toBe(1);

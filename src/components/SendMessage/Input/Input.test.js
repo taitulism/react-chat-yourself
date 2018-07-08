@@ -2,55 +2,82 @@ import React from 'react';
 import Input from './Input';
 import { shallow, mount } from 'enzyme';
 
+const TEST_STRING = 'testing';
+
+function noop () {}
+
 function createTestProps (props) {
 	return {
-		sendHandler: jest.fn(),
+		onChange: noop,
 		...props,
 	};
 }
 
 describe('<Input />', () => {
-	let wrapper;
-	let props;
+	describe('Rendering', () => {
+		let props;
+		let wrapper;
+		
+		beforeEach(() => {
+			props = createTestProps();
+			wrapper = shallow(<Input {...props} />);
+		});
+		
+		it('renders without crashing', () => {
+			expect(wrapper).toBeTruthy();
+		});
+		
+		it('renders an <input> element', () => {
+			expect(wrapper.find('input')).toHaveLength(1);
+		});
+		
+		describe('with `text` prop', () => {
+			beforeEach(() => {
+				props = createTestProps({text: TEST_STRING});
+				wrapper = shallow(<Input {...props} />);
+			});
 
-	beforeEach(() => {
-		props = createTestProps();
-		wrapper = shallow(<Input {...props} />)
+			it('renders the <input> with text when `text` prop is passed in', () => {
+				expect(wrapper.find('input').props().value).toEqual(TEST_STRING);
+			});
+		});
 	});
 	
-	it('renders without crashing');
+	describe ('Interaction', () => {
+		describe ('when typing (or any value change)', () => {
+			let props;
+			let wrapper;
+			let mockCallback;
+			
+			beforeEach(() => {
+				mockCallback = jest.fn();
+				props = createTestProps({onChange: mockCallback});
+				wrapper = shallow(<Input {...props} />);
+			});
+	
+			it('runs its `onChange` prop-function when its value changes', () => {
+				wrapper.simulate('change', {target: {key: 'A'}});
+	
+				expect(mockCallback.mock.calls.length).toBe(1);
+			});
+		});
 
-	it('has an input field', () => {
-		expect(wrapper.find('input')).toHaveLength(1);
-	});
-
-	it('has a "send" button', () => {
-		expect(wrapper.find('button')).toHaveLength(1);
-	});
-
-	it('calls the "sendHandler" function when "send" is clicked', () => {
-		const button = wrapper.find('button');
-		
-		button.simulate('click');
-
-		expect(props.sendHandler).toHaveBeenCalledTimes(1);
-	});
-
-	it('calls the "sendHandler" function when "Enter" is pressed', () => {
-		const input = wrapper.find('input');
-		
-		input.simulate('keyPress', {key: 'Enter'});
-
-		expect(props.sendHandler).toHaveBeenCalledTimes(1);
-	});
-
-	it('calls the "sendHandler" with the input value', () => {
-		const input = wrapper.find('input');
-		const button = wrapper.find('button');
-		
-		wrapper.setState({ message: 'abc' });
-		button.simulate('click');
-
-		expect(props.sendHandler.mock.calls[0][0]).toEqual('abc');
+		describe ('when pressing the `Enter` key', () => {
+			let props;
+			let wrapper;
+			let mockCallback;
+			
+			beforeEach(() => {
+				mockCallback = jest.fn();
+				props = createTestProps({text: TEST_STRING, onEnter: mockCallback});
+				wrapper = shallow(<Input {...props} />);
+			});
+	
+			it('runs its `onEnter` prop-function when you hit `Enter`', () => {
+				wrapper.simulate('keyPress', {key: 'Enter'});
+	
+				expect(mockCallback.mock.calls.length).toBe(1);
+			});
+		});
 	});
 });
